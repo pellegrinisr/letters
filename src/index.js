@@ -44,36 +44,16 @@ class Post extends Component {
     super(props);
   }
   render() {
-    return React.createElement(
-      //string representing element
-      'div',
-      //props
-      {
-        className: 'post'
-      },
-      //children
-      React.createElement(
-        //string rep. element
-        'h2',
-        //props
-        {
-          className: 'postAuthor',
-          id: this.props.id
-        },
-        //children
-        this.props.user,
-        React.createElement( 
-          //string rep. element
-          'span',
-          //props
-          {
-            className: 'postBody'
-          },
-          //children
-          this.props.content
-        ),
-        this.props.children
-      )
+    return (
+      <div className="post">
+        <h2 className="postAuthor" id={this.props.id}>
+          {this.props.user}
+          <span className="postBody">
+            {this.props.content}
+            {this.props.children}
+          </span>
+        </h2>
+      </div>
     );
   }
 }
@@ -89,25 +69,15 @@ class Comment extends Component {
     super(props);
   }
   render() {
-    return React.createElement(
-      'div',
-      {
-        className: 'comment'
-      },
-      React.createElement(
-        'h2',
-        {
-          className: 'commentAuthor'
-        },
-        this.props.user,
-        React.createElement(
-          'span',
-          {
-            className: 'commentContent'
-          },
-          this.props.content
-        )
-      )
+    return (
+      <div className="comment">
+        <h2 className="commentAuthor">
+          {this.props.user}
+          <span className="commentContent">
+            {this.props.content}
+          </span>
+        </h2>
+      </div>
     );
   }
 }
