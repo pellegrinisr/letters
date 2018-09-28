@@ -155,28 +155,22 @@ class CreateComment extends Component {
     }))
   }
   render() {
-    return React.createElement(
-      'form',
-      {
-        className: 'createComment',
-        onSubmit: this.handleSubmit
-      },
-      React.createElement('input', {
-        type: 'text',
-        placeholder: 'Your name',
-        value: this.state.user,
-        onChange: this.handleUserChange
-      }),
-      React.createElement('input', {
-        type: 'text',
-        placeholder: 'Thoughts?',
-        value: this.state.content,
-        onChange: this.handleTextChange
-      }),
-      React.createElement('input', {
-        type: 'submit',
-        value: 'Post'
-      })
+    return (
+      <form onSubmit={this.handleSubmit} className="createComment">
+        <input
+          value={this.state.user}
+          onChange={this.handleUserChange}
+          placeholder="Your name"
+          type="text"
+        />
+        <input 
+          value={this.state.content}
+          onChange={this.handleTextChange}
+          placeholder="Thoughts?"
+          type="text"
+        />
+        <button type="submit">Post</button>
+      </form>
     );
   }
 }
@@ -203,27 +197,26 @@ class CommentBox extends Component {
     });
   }
   render() {
-    return React.createElement(
-      'div',
-      {
-        className: 'commentBox'
-      },
-      React.createElement(Post, {
-        id: this.props.post.id,
-        content: this.props.post.content,
-        user: this.props.post.user
-      }),
-      this.state.comments.map((comment) => {
-        return React.createElement(Comment, {
-          key: comment.id,
-          id: comment.id,
-          content: comment.content,
-          user: comment.user
-        });
-      }),
-      React.createElement(CreateComment, {
-        onCommentSubmit: this.handleCommentSubmit
-      })
+    return(
+      <div className="commentBox">
+        <Post 
+          id={this.props.post.id}
+          content={this.props.post.content}
+          user={this.props.post.user}
+        />
+        {this.state.comments.map((comment) => {
+          return (
+            <Comment 
+              key={comment.id}
+              content={comment.content}
+              user={comment.user}
+            />
+          );
+        })}
+        <CreateComment 
+          onCommentSubmit={this.handleCommentSubmit}
+        />
+      </div>
     );
   }
 }
@@ -234,9 +227,9 @@ CommentBox.propTypes = {
 }
 
 render(
-  React.createElement(CommentBox, {
-    comments: data.comments,
-    post: data.post
-  }),
+  <CommentBox 
+    comments={data.comments}
+    post={data.post}
+  />,
   node
 );
